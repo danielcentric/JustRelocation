@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guy's Hospital - NHS Healthcare Worker Services | JustRelocation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-blue: #0057d9;
+            --success-green: #00a866;
+            --accent-red: #ff4757;
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --bg-gray: #f8f9fa;
+            --border-color: #e9ecef;
+        }
+
+        /* Guy's Hospital specific styles */
+        .hospital-hero {
+            background: linear-gradient(135deg, rgba(0,87,217,0.85) 0%, rgba(0,53,128,0.85) 100%),
+                        url('https://www.guysandstthomas.nhs.uk/assets/Image/GSTT%20Guys%20Hospital%20Front%20Entrance%20.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hospital-info {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            padding: 2rem;
+            margin: -2rem auto 2rem;
+            max-width: 900px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hospital-badge {
+            display: inline-block;
+            background: #00a866;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hospital-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hospital-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hospital-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .hospital-contact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 1.5rem;
+            background: var(--bg-gray);
+            border-radius: 8px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-item div {
+            color: var(--text-primary);
+        }
+
+        .contact-item strong {
+            color: var(--text-primary);
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .vendor-category {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        .category-count {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .vendor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .vendor-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 0;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .vendor-image {
+            width: 100%;
+            height: 180px;
+            background: var(--bg-gray);
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .vendor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Logo-specific styling */
+        .vendor-image-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 2rem;
+        }
+
+        .vendor-image-logo img {
+            object-fit: contain;
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .vendor-content {
+            padding: 1.5rem;
+        }
+
+        .vendor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-color: var(--primary-blue);
+        }
+
+        .vendor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .vendor-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .vendor-category-tag {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .vendor-distance {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--success-green);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .vendor-address {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vendor-hours {
+            background: var(--bg-gray);
+            padding: 0.75rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .vendor-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .feature-tag {
+            background: rgba(0, 168, 102, 0.1);
+            color: var(--success-green);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .vendor-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+        }
+
+        .vendor-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0047b3;
+        }
+
+        .btn-success {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #008f57;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .summary-section {
+            background: linear-gradient(135deg, #f8f9ff, #e8f0ff);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .summary-stat {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .summary-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: block;
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Navigation Header Styles */
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-center {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-bell {
+            position: relative;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-red);
+            border-radius: 50%;
+        }
+
+        .list-property-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .list-property-btn:hover {
+            background: #0047b3;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .account-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .account-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            min-width: 220px;
+            display: none;
+            z-index: 1001;
+        }
+
+        .account-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .user-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-email {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: var(--bg-gray);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 0.5rem 0;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 3rem 0 1.5rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2rem 0;
+            margin: 0 auto;
+            max-width: 1200px;
+            border-top: 1px solid #4a5568;
+        }
+
+        .footer-copyright {
+            color: #cbd5e0;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #4a5568;
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* WhatsApp Chat Button */
+        .whatsapp-chat {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .whatsapp-icon {
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-icon:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .chat-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-chat:hover .chat-tooltip {
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .hospital-title {
+                font-size: 2rem;
+            }
+
+            .vendor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vendor-actions {
+                flex-direction: column;
+            }
+
+            .nav-center {
+                display: none;
+            }
+
+            .header-main {
+                padding: 0 1rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-main">
+            <a href="index.html" class="logo">JustRelocation</a>
+
+            <nav class="nav-center">
+                <a href="index.html" class="nav-link">NHS Trusts</a>
+                <a href="housing.html" class="nav-link">Housing</a>
+                <a href="banking.html" class="nav-link">Banking</a>
+                <a href="registration.html" class="nav-link">Registration</a>
+                <a href="transport.html" class="nav-link">Transport</a>
+                <a href="schools.html" class="nav-link">Schools</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-right">
+                <div class="notification-bell">
+                    <span>🔔</span>
+                    <span class="notification-dot"></span>
+                </div>
+                <a href="list-service.html" class="list-property-btn">List your service</a>
+                <div class="account-menu" onclick="toggleAccountDropdown()">
+                    <div class="account-avatar">J</div>
+                    <span>▼</span>
+                    <div class="account-dropdown" id="accountDropdown">
+                        <div class="dropdown-header">
+                            <div class="user-info">
+                                <div class="user-name">John Smith</div>
+                                <div class="user-email">john.smith@nhs.uk</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="my-profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="saved-services.html" class="dropdown-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Saved Services</span>
+                        </a>
+                        <a href="support.html" class="dropdown-item">
+                            <i class="fas fa-life-ring"></i>
+                            <span>Help & Support</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="provider-portal.html" class="dropdown-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Provider Portal</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hospital Hero Section -->
+    <section class="hospital-hero" style="background-image: linear-gradient(135deg, rgba(0,87,217,0.9) 0%, rgba(0,53,128,0.9) 100%), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=1200&h=600&fit=crop&crop=center'); background-size: cover; background-position: center;">
+        <div class="section-container">
+            <div class="hospital-badge">NHS Foundation Trust</div>
+            <h1 class="hospital-title">Guy's Hospital</h1>
+            <p class="hospital-subtitle">Guy's and St Thomas' NHS Foundation Trust</p>
+
+            <div class="hospital-info">
+                <div class="hospital-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">20</span>
+                        <div class="stat-label">Verified Vendors</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <div class="stat-label">Service Categories</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">0.36km</span>
+                        <div class="stat-label">Average Distance</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">4.2</span>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+
+                <div class="hospital-contact">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong>Address:</strong><br>
+                            Great Maze Pond, London SE1 9RT
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong>Phone:</strong><br>
+                            020 7188 7188
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-train"></i>
+                        <div>
+                            <strong>Nearest Station:</strong><br>
+                            London Bridge (5 min walk)
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <strong>Emergency:</strong><br>
+                            24/7 A&E Department
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banking Services -->
+    <section class="section">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">💳</span>
+                        Banking Services
+                    </h2>
+                    <span class="category-count">2 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="bankingVendors">
+                    <!-- Banking vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Housing Services -->
+    <section class="section" style="background: var(--bg-gray);">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">🏠</span>
+                        Housing & Permanent Living
+                    </h2>
+                    <span class="category-count">4 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="housingVendors">
+                    <!-- Housing vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Restaurants -->
+    <section class="section">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">🍽️</span>
+                        Restaurants & Dining
+                    </h2>
+                    <span class="category-count">3 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="restaurantVendors">
+                    <!-- Restaurant vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hotels -->
+    <section class="section" style="background: var(--bg-gray);">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">🏨</span>
+                        Hotels & Accommodation
+                    </h2>
+                    <span class="category-count">3 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="hotelVendors">
+                    <!-- Hotel vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Healthcare Services -->
+    <section class="section">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">🏥</span>
+                        Healthcare Services
+                    </h2>
+                    <span class="category-count">4 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="healthcareVendors">
+                    <!-- Healthcare vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Essential Services -->
+    <section class="section" style="background: var(--bg-gray);">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">🛒</span>
+                        Essential Services
+                    </h2>
+                    <span class="category-count">4 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="essentialVendors">
+                    <!-- Essential services vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transport Services -->
+    <section class="section">
+        <div class="section-container">
+            <div class="vendor-category">
+                <div class="category-header">
+                    <h2 class="category-title">
+                        <span class="category-icon">🚗</span>
+                        Transport Services
+                    </h2>
+                    <span class="category-count">2 Providers</span>
+                </div>
+
+                <div class="vendor-grid" id="transportVendors">
+                    <!-- Transport vendors will be populated here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section class="summary-section">
+        <div class="section-container">
+            <h2>Complete Healthcare Worker Support Around Guy's Hospital</h2>
+            <p style="max-width: 600px; margin: 1rem auto 2rem; color: var(--text-secondary);">
+                Everything you need for your NHS relocation to Guy's Hospital - from banking and permanent housing to dining and transport - all within walking distance.
+            </p>
+
+            <div class="summary-stats">
+                <div class="summary-stat">
+                    <span class="summary-number">20</span>
+                    <div class="summary-label">Verified Vendors</div>
+                </div>
+                <div class="summary-stat">
+                    <span class="summary-number">100%</span>
+                    <div class="summary-label">NHS Friendly</div>
+                </div>
+                <div class="summary-stat">
+                    <span class="summary-number">5 min</span>
+                    <div class="summary-label">Walk to Station</div>
+                </div>
+                <div class="summary-stat">
+                    <span class="summary-number">24/7</span>
+                    <div class="summary-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>NHS Trusts</h4>
+                <ul class="footer-links">
+                    <li><a href="guys-hospital.html">Guy's Hospital</a></li>
+                    <li><a href="#">St Thomas' Hospital</a></li>
+                    <li><a href="#">King's College Hospital</a></li>
+                    <li><a href="#">London Bridge Hospitals</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="housing.html">Housing Search</a></li>
+                    <li><a href="banking.html">Banking Options</a></li>
+                    <li><a href="#">GP Registration</a></li>
+                    <li><a href="#">Transport Services</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul class="footer-links">
+                    <li><a href="support.html">Help Center</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">NHS Partnerships</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                © 2024 JustRelocation. All rights reserved.
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Support -->
+    <div class="whatsapp-chat" onclick="openSupportChat()">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="chat-tooltip">
+            <span>Need help? Chat with us!</span>
+        </div>
+    </div>
+
+    <!-- Guy's Hospital JavaScript -->
+    <script>
+        class GuysHospitalDirectory {
+            constructor() {
+                this.vendors = [];
+                this.loadVendorData();
+            }
+
+            loadVendorData() {
+                // Load vendors with real images
+                this.vendors = [
+                    // Banking
+                    {
+                        category: 'Banking',
+                        business_name: 'HSBC Bank',
+                        subcategory: 'High Street Bank',
+                        address: '28 Borough High Street, Southwark, London',
+                        postcode: 'SE1 1YB',
+                        phone: '0345 740 4404',
+                        website: 'https://www.hsbc.co.uk',
+                        distance_from_hospital: 0.35,
+                        business_hours: 'Mon-Fri: 09:30-16:30, Sat: 09:30-13:00, Sun: Closed',
+                        services_offered: 'Counter service, ATM, coin deposit/withdrawal, balance enquiry, Wi-Fi, NHS banking packages',
+                        rating: 3.8,
+                        review_count: 127,
+                        specializations: 'NHS-friendly banking, healthcare worker discounts, same-day account opening',
+                        image: 'https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Banking',
+                        business_name: 'Barclays Bank',
+                        subcategory: 'High Street Bank',
+                        address: '29 Borough High Street, London',
+                        postcode: 'SE1 1LY',
+                        phone: '0345 734 5345',
+                        website: 'https://www.barclays.co.uk',
+                        distance_from_hospital: 0.36,
+                        business_hours: 'Mon-Fri: 09:30-16:30, Sat-Sun: Closed',
+                        services_offered: 'Cash machine, self-service devices, cheque deposits, traditional counter service, mortgage advisor',
+                        rating: 3.6,
+                        review_count: 89,
+                        specializations: 'Healthcare professional accounts, mortgage services, business banking',
+                        image: 'https://images.unsplash.com/photo-1556742393-d75f468bfcb0?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Housing - Permanent Living Options
+                    {
+                        category: 'Housing',
+                        business_name: 'Foxtons London Bridge',
+                        subcategory: 'Estate Agent',
+                        address: '94 Borough High Street, London',
+                        postcode: 'SE1 1LL',
+                        phone: '020 7386 6500',
+                        website: 'https://www.foxtons.co.uk',
+                        distance_from_hospital: 0.37,
+                        business_hours: 'Mon-Fri: 08:30-19:00, Sat: 09:00-18:00, Sun: 10:00-17:00',
+                        services_offered: 'Property sales, lettings, property management, market appraisals, tenant referencing',
+                        rating: 4.1,
+                        review_count: 203,
+                        specializations: 'NHS worker housing, hospital proximity properties, long-term rentals',
+                        image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Housing',
+                        business_name: 'Dexters London Bridge',
+                        subcategory: 'Estate Agent',
+                        address: '15 Tooley Street, London',
+                        postcode: 'SE1 2QB',
+                        phone: '020 7403 2200',
+                        website: 'https://www.dexters.co.uk',
+                        distance_from_hospital: 0.28,
+                        business_hours: 'Mon-Fri: 09:00-18:00, Sat: 10:00-16:00, Sun: Closed',
+                        services_offered: 'Residential lettings, property sales, tenant services, NHS worker packages',
+                        rating: 4.3,
+                        review_count: 156,
+                        specializations: 'Healthcare worker rentals, flexible lease terms, furnished properties',
+                        image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Housing',
+                        business_name: 'Empire Square Apartments',
+                        subcategory: 'Luxury Apartments',
+                        address: 'Empire Square, Long Lane, London',
+                        postcode: 'SE1 4PG',
+                        phone: '020 7407 9000',
+                        website: 'https://www.empiresquare.co.uk',
+                        distance_from_hospital: 0.74,
+                        business_hours: '24/7 concierge service',
+                        services_offered: '1-3 bed apartments, concierge, gym, NHS worker packages, flexible leases',
+                        rating: 4.5,
+                        review_count: 89,
+                        specializations: 'NHS staff preferred rates, furnished options, 6-month+ leases',
+                        image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Housing',
+                        business_name: 'One Tower Bridge',
+                        subcategory: 'Premium Development',
+                        address: 'Tower Bridge Road, London',
+                        postcode: 'SE1 2UP',
+                        phone: '020 7378 9200',
+                        website: 'https://www.onetowerbridge.com',
+                        distance_from_hospital: 0.65,
+                        business_hours: 'Mon-Sat: 10:00-18:00, Sun: 10:00-17:00',
+                        services_offered: 'Studio to 3-bed apartments, gym, pool, concierge, healthcare worker discounts',
+                        rating: 4.6,
+                        review_count: 142,
+                        specializations: 'NHS worker priority, furnished units, Thames views, transport links',
+                        image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Restaurants
+                    {
+                        category: 'Restaurants',
+                        business_name: 'Borough Market',
+                        subcategory: 'Food Market',
+                        address: '8 Southwark Street, London',
+                        postcode: 'SE1 1TL',
+                        phone: '020 7407 1002',
+                        website: 'https://boroughmarket.org.uk',
+                        distance_from_hospital: 0.32,
+                        business_hours: 'Wed-Thu: 10:00-17:00, Fri: 10:00-18:00, Sat: 08:00-17:00, Sun-Tue: Closed',
+                        services_offered: 'Fresh produce, prepared foods, artisan vendors, specialty ingredients',
+                        rating: 4.6,
+                        review_count: 8934,
+                        specializations: 'Fresh healthy options, quick grab-and-go meals, international cuisine',
+                        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Restaurants',
+                        business_name: 'Padella',
+                        subcategory: 'Italian',
+                        address: '6 Southwark Street, London',
+                        postcode: 'SE1 1TQ',
+                        phone: '020 7357 8977',
+                        website: 'https://www.padella.co',
+                        distance_from_hospital: 0.31,
+                        business_hours: 'Mon-Sat: 12:00-16:00, Sun: Closed',
+                        services_offered: 'Fresh handmade pasta, Italian street food, takeaway available',
+                        rating: 4.5,
+                        review_count: 2156,
+                        specializations: 'Quick lunch options, authentic Italian pasta, hospital staff discounts',
+                        image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Restaurants',
+                        business_name: 'The George Inn',
+                        subcategory: 'Traditional Pub',
+                        address: '75-77 Borough High Street, London',
+                        postcode: 'SE1 1NH',
+                        phone: '020 7407 2056',
+                        website: 'https://www.george-southwark.co.uk',
+                        distance_from_hospital: 0.34,
+                        business_hours: 'Mon-Wed: 11:00-23:00, Thu-Sat: 11:00-24:00, Sun: 12:00-22:30',
+                        services_offered: 'Traditional pub food, real ales, private dining, historic atmosphere',
+                        rating: 4.2,
+                        review_count: 1876,
+                        specializations: 'Historic venue, NHS staff gatherings, traditional British cuisine',
+                        image: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Hotels
+                    {
+                        category: 'Hotels',
+                        business_name: 'Premier Inn London Southwark',
+                        subcategory: 'Budget Hotel',
+                        address: '34 Park Street, London',
+                        postcode: 'SE1 9EF',
+                        phone: '0333 777 6951',
+                        website: 'https://www.premierinn.com',
+                        distance_from_hospital: 0.41,
+                        business_hours: '24/7 reception',
+                        services_offered: 'Accommodation, restaurant, parking, family rooms, accessible rooms',
+                        rating: 4.4,
+                        review_count: 3421,
+                        specializations: 'Hospital visitor rates, extended stays, NHS staff accommodations',
+                        image: 'https://logos-world.net/wp-content/uploads/2021/11/Premier-Inn-Logo.png'
+                    },
+                    {
+                        category: 'Hotels',
+                        business_name: 'Travelodge London Central Southwark',
+                        subcategory: 'Budget Hotel',
+                        address: '202-206 Union Street, London',
+                        postcode: 'SE1 0LX',
+                        phone: '0871 984 6484',
+                        website: 'https://www.travelodge.co.uk',
+                        distance_from_hospital: 0.89,
+                        business_hours: '24/7 reception',
+                        services_offered: 'Budget accommodation, family rooms, parking, continental breakfast',
+                        rating: 4.1,
+                        review_count: 2103,
+                        specializations: 'Medical visitor rates, long-stay discounts, proximity to Guy\'s Hospital',
+                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Travelodge_logo_2018.svg/2560px-Travelodge_logo_2018.svg.png'
+                    },
+                    {
+                        category: 'Hotels',
+                        business_name: 'London Bridge Hotel',
+                        subcategory: 'Boutique Hotel',
+                        address: '8-18 London Bridge Street, London',
+                        postcode: 'SE1 9SG',
+                        phone: '020 7855 2200',
+                        website: 'https://www.londonbridgehotel.com',
+                        distance_from_hospital: 0.40,
+                        business_hours: '24/7 reception',
+                        services_offered: 'Luxury accommodation, restaurant, bar, meeting rooms, concierge service',
+                        rating: 4.6,
+                        review_count: 1876,
+                        specializations: 'Executive accommodation, medical professional stays, premium services',
+                        image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // GP Practices
+                    {
+                        category: 'GP Practices',
+                        business_name: 'Blackfriars Medical Practice',
+                        subcategory: 'NHS GP Surgery',
+                        address: '45 Colombo Street, London',
+                        postcode: 'SE1 8EE',
+                        phone: '020 7928 1271',
+                        website: 'https://www.blackfriarsmedicalpractice.nhs.uk',
+                        distance_from_hospital: 0.91,
+                        business_hours: 'Mon-Fri: 08:00-18:30, Sat-Sun: Closed (Emergency: 111)',
+                        services_offered: 'General practice, chronic disease management, health checks, vaccinations, minor surgery',
+                        rating: 4.2,
+                        review_count: 98,
+                        specializations: 'NHS staff registration, occupational health, urgent appointments',
+                        image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'GP Practices',
+                        business_name: 'Borough Health Centre',
+                        subcategory: 'NHS GP Surgery',
+                        address: '120 Borough High Street, London',
+                        postcode: 'SE1 1LB',
+                        phone: '020 7407 8300',
+                        website: 'https://www.boroughhealthcentre.nhs.uk',
+                        distance_from_hospital: 0.47,
+                        business_hours: 'Mon-Fri: 08:00-18:00, Sat: 09:00-12:00, Sun: Closed',
+                        services_offered: 'Family medicine, women\'s health, diabetes clinic, mental health support',
+                        rating: 4.0,
+                        review_count: 156,
+                        specializations: 'Healthcare worker friendly, flexible appointments, walk-in services',
+                        image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Pharmacies
+                    {
+                        category: 'Pharmacies',
+                        business_name: 'Boots Pharmacy London Bridge',
+                        subcategory: 'Chain Pharmacy',
+                        address: 'St. Thomas Street, London Bridge Station',
+                        postcode: 'SE1 9SP',
+                        phone: '020 7403 4055',
+                        website: 'https://www.boots.com',
+                        distance_from_hospital: 0.21,
+                        business_hours: 'Mon-Fri: 07:00-22:00, Sat: 08:00-22:00, Sun: 09:00-21:00',
+                        services_offered: 'Prescription dispensing, health consultations, travel health, beauty products, NHS services',
+                        rating: 4.1,
+                        review_count: 234,
+                        specializations: 'Extended hours, NHS prescription services, healthcare consultations',
+                        image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Pharmacies',
+                        business_name: 'Sainsbury\'s Pharmacy Guy\'s Hospital',
+                        subcategory: 'Supermarket Pharmacy',
+                        address: 'Guy\'s Hospital, Great Maze Pond',
+                        postcode: 'SE1 9RT',
+                        phone: '020 7188 8888',
+                        website: 'https://www.sainsburys.co.uk/pharmacy',
+                        distance_from_hospital: 0.00,
+                        business_hours: 'Mon-Fri: 08:00-19:00, Sat: 09:00-17:00, Sun: 10:00-16:00',
+                        services_offered: 'NHS prescriptions, private prescriptions, health checks, flu vaccinations',
+                        rating: 4.3,
+                        review_count: 89,
+                        specializations: 'Hospital-based pharmacy, NHS staff services, convenient location',
+                        image: 'https://images.unsplash.com/photo-1576602976047-174e57a47881?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Supermarkets
+                    {
+                        category: 'Supermarkets',
+                        business_name: 'Tesco Express Tower Bridge',
+                        subcategory: 'Convenience Store',
+                        address: '67-69 Tower Bridge Road, London',
+                        postcode: 'SE1 4TL',
+                        phone: '0345 674 6447',
+                        website: 'https://www.tesco.com',
+                        distance_from_hospital: 0.71,
+                        business_hours: 'Mon-Sun: 07:00-23:00',
+                        services_offered: 'Groceries, ready meals, pharmacy, ATM, meal deals, fresh produce',
+                        rating: 3.9,
+                        review_count: 287,
+                        specializations: 'Convenient location, extended hours, healthcare worker discounts',
+                        image: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Supermarkets',
+                        business_name: 'Sainsbury\'s Local Tower Bridge',
+                        subcategory: 'Convenience Store',
+                        address: '1 Tower Bridge Road, London',
+                        postcode: 'SE1 2HZ',
+                        phone: '020 7357 6682',
+                        website: 'https://www.sainsburys.co.uk',
+                        distance_from_hospital: 0.54,
+                        business_hours: 'Mon-Sat: 07:00-23:00, Sun: 08:00-22:30',
+                        services_offered: 'Fresh food, groceries, meal solutions, bakery, alcohol, household items',
+                        rating: 4.0,
+                        review_count: 198,
+                        specializations: 'Fresh food focus, late opening, local community store',
+                        image: 'https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Gyms
+                    {
+                        category: 'Gyms',
+                        business_name: 'PureGym London Borough',
+                        subcategory: 'Chain Gym',
+                        address: 'Empire Square, Long Lane, London',
+                        postcode: 'SE1 4PG',
+                        phone: '0344 477 0005',
+                        website: 'https://www.puregym.com',
+                        distance_from_hospital: 0.74,
+                        business_hours: '24/7 access for members',
+                        services_offered: '220+ pieces of equipment, 50+ fitness classes, personal training, 24/7 access',
+                        rating: 4.2,
+                        review_count: 1432,
+                        specializations: '24/7 access, NHS staff discounts, flexible membership, no contract',
+                        image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=250&fit=crop&crop=center'
+                    },
+                    {
+                        category: 'Gyms',
+                        business_name: 'The Thomas Guy Club',
+                        subcategory: 'Hospital Sports Club',
+                        address: 'Guy\'s Hospital, Great Maze Pond',
+                        postcode: 'SE1 9RT',
+                        phone: '020 7955 4444',
+                        website: 'https://www.guysandstthomas.nhs.uk/staff/thomas-guy-club',
+                        distance_from_hospital: 0.00,
+                        business_hours: 'Mon-Fri: 06:30-22:00, Sat-Sun: 08:00-20:00',
+                        services_offered: 'Two fitness centres, 25m pool, squash courts, group classes, personal training',
+                        rating: 4.5,
+                        review_count: 156,
+                        specializations: 'Hospital staff club, swimming pool, NHS employee membership, convenient location',
+                        image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=400&h=250&fit=crop&crop=center'
+                    },
+
+                    // Transport
+                    {
+                        category: 'Transport',
+                        business_name: 'London Bridge Station',
+                        subcategory: 'Railway Station',
+                        address: 'Railway Approach, London',
+                        postcode: 'SE1 9SP',
+                        phone: '0345 711 41 41',
+                        website: 'https://tfl.gov.uk/modes/tube/london-bridge',
+                        distance_from_hospital: 0.22,
+                        business_hours: '24/7 (service hours vary)',
+                        services_offered: 'National Rail, Underground (Jubilee, Northern lines), bus connections, taxi rank',
+                        rating: 4.0,
+                        review_count: 2341,
+                        specializations: 'Major transport hub, direct links to airports, frequent services',
+                        image: 'assets/logos/tfl-roundel.svg'
+                    },
+                    {
+                        category: 'Transport',
+                        business_name: 'Enterprise Rent-A-Car London Bridge',
+                        subcategory: 'Car Rental',
+                        address: '200 Great Dover Street, London',
+                        postcode: 'SE1 4YB',
+                        phone: '020 7940 4200',
+                        website: 'https://www.enterprise.co.uk',
+                        distance_from_hospital: 0.65,
+                        business_hours: 'Mon-Fri: 08:00-18:00, Sat: 08:00-16:00, Sun: 10:00-16:00',
+                        services_offered: 'Car rental, van hire, long-term rentals, business accounts, one-way rentals',
+                        rating: 4.1,
+                        review_count: 187,
+                        specializations: 'NHS staff rates, flexible rentals, convenient pickup, business solutions',
+                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Enterprise_Rent-A-Car_Logo.svg/2560px-Enterprise_Rent-A-Car_Logo.svg.png'
+                    }
+                ];
+
+                this.renderVendors();
+            }
+
+            renderVendors() {
+                // Group vendors by category
+                const vendorsByCategory = {};
+                this.vendors.forEach(vendor => {
+                    if (!vendorsByCategory[vendor.category]) {
+                        vendorsByCategory[vendor.category] = [];
+                    }
+                    vendorsByCategory[vendor.category].push(vendor);
+                });
+
+                // Render each category
+                Object.keys(vendorsByCategory).forEach(category => {
+                    const containerId = this.getCategoryContainerId(category);
+                    const container = document.getElementById(containerId);
+                    if (container) {
+                        container.innerHTML = vendorsByCategory[category].map(vendor => this.createVendorCard(vendor)).join('');
+                    }
+                });
+            }
+
+            getCategoryContainerId(category) {
+                switch (category) {
+                    case 'Banking': return 'bankingVendors';
+                    case 'Housing': return 'housingVendors';
+                    case 'Restaurants': return 'restaurantVendors';
+                    case 'Hotels': return 'hotelVendors';
+                    case 'GP Practices':
+                    case 'Pharmacies': return 'healthcareVendors';
+                    case 'Supermarkets':
+                    case 'Gyms': return 'essentialVendors';
+                    case 'Transport': return 'transportVendors';
+                    default: return 'essentialVendors';
+                }
+            }
+
+            getCategoryIcon(category) {
+                const icons = {
+                    'Hotels': 'assets/icons/category-hotel.svg',
+                    'Transport': 'assets/icons/category-transport.svg',
+                    'Banking': 'assets/icons/category-banking.svg',
+                    'Housing': 'assets/icons/category-housing.svg',
+                    'Restaurants': 'assets/icons/category-restaurant.svg',
+                    'GP Practices': 'assets/icons/category-healthcare.svg',
+                    'Pharmacies': 'assets/icons/category-healthcare.svg',
+                    'Supermarkets': 'assets/icons/category-supermarket.svg',
+                    'Gyms': 'assets/icons/category-gym.svg'
+                };
+                return icons[category] || 'assets/placeholders/listing-empty-1.svg';
+            }
+
+            getVendorImageUrl(vendor) {
+                // Fallback chain: vendor photos → vendor logo → category icon → placeholder
+                if (vendor.images && vendor.images.length > 0) {
+                    return vendor.images[0].url;
+                } else if (vendor.logo_url) {
+                    return vendor.logo_url;
+                } else if (vendor.image) {
+                    return vendor.image;
+                } else if (vendor.category) {
+                    return this.getCategoryIcon(vendor.category);
+                } else {
+                    return 'assets/placeholders/listing-empty-1.svg';
+                }
+            }
+
+            createVendorCard(vendor) {
+                const features = vendor.specializations ? vendor.specializations.split(', ') : [];
+                const imageUrl = this.getVendorImageUrl(vendor);
+                const imageClass = (vendor.logo_url || !vendor.image) ? 'vendor-image-logo' : 'vendor-image-photo';
+
+                return `
+                    <div class="vendor-card">
+                        <div class="vendor-image ${imageClass}">
+                            <img src="${imageUrl}"
+                                 alt="${vendor.business_name}" loading="lazy"
+                                 onerror="this.src='assets/placeholders/listing-empty-1.svg'">
+                            <button class="favorite-button" data-vendor-id="${vendor.id}" onclick="toggleFavorite(this, ${JSON.stringify(vendor).replace(/"/g, '&quot;')})">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <div class="vendor-distance">${vendor.distance_from_hospital}km</div>
+                        </div>
+                        <div class="vendor-content">
+                            <div class="vendor-header">
+                                <div>
+                                    <h3 class="vendor-name">${vendor.business_name}</h3>
+                                    <span class="vendor-category-tag">${vendor.subcategory || vendor.category}</span>
+                                </div>
+                            </div>
+
+                        <div class="vendor-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${vendor.address}, ${vendor.postcode}
+                        </div>
+
+                        <div class="vendor-hours">
+                            <i class="fas fa-clock"></i>
+                            <strong>Hours:</strong> ${vendor.business_hours}
+                        </div>
+
+                        <div class="vendor-rating">
+                            <div class="rating-stars">
+                                ${this.generateStars(vendor.rating)}
+                            </div>
+                            <span>${vendor.rating}/5.0 (${vendor.review_count} reviews)</span>
+                        </div>
+
+                        <div class="vendor-features">
+                            ${features.slice(0, 3).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                        </div>
+
+                        <div class="vendor-actions">
+                            <a href="tel:${vendor.phone}" class="action-btn btn-primary">
+                                <i class="fas fa-phone"></i>
+                                Call Now
+                            </a>
+                            ${vendor.website ? `
+                                <a href="${vendor.website}" target="_blank" class="action-btn btn-outline">
+                                    <i class="fas fa-globe"></i>
+                                    Visit Site
+                                </a>
+                            ` : ''}
+                            <button class="action-btn btn-success" onclick="this.showVendorDetails('${vendor.business_name}')">
+                                <i class="fas fa-info-circle"></i>
+                                Details
+                            </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            generateStars(rating) {
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5;
+                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+                return '★'.repeat(fullStars) +
+                       (halfStar ? '☆' : '') +
+                       '☆'.repeat(emptyStars);
+            }
+
+            showVendorDetails(vendorName) {
+                const vendor = this.vendors.find(v => v.business_name === vendorName);
+                if (vendor) {
+                    alert(`${vendor.business_name}\n\nServices: ${vendor.services_offered}\n\nSpecializations: ${vendor.specializations}\n\nPhone: ${vendor.phone}`);
+                }
+            }
+        }
+
+        // WhatsApp Support
+        function openSupportChat() {
+            const message = "Hi! I need help finding services near Guy's Hospital through JustRelocation.";
+            const whatsappUrl = `https://wa.me/447000000000?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Account Menu Dropdown
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('show');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const accountMenu = document.querySelector('.account-menu');
+            const dropdown = document.getElementById('accountDropdown');
+
+            if (accountMenu && dropdown && !accountMenu.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Logout function
+        function logout() {
+            alert('Logging out...');
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.guysHospital = new GuysHospitalDirectory();
+        });
+    </script>
+    <script src="favorites.js"></script>
+</body>
+</html>

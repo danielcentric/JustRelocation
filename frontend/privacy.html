@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - JustRelocation | GDPR Compliant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="expedia-style.css">
+    <style>
+        .privacy-hero {
+            background: linear-gradient(135deg, #003580 0%, #0057d9 100%);
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+        .privacy-hero h1 {
+            font-size: 48px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .privacy-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .privacy-content {
+            padding: 80px 0;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .privacy-section {
+            margin-bottom: 60px;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .privacy-section h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            color: #003580;
+            border-bottom: 3px solid #0057d9;
+            padding-bottom: 12px;
+        }
+        .privacy-section h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            margin-top: 32px;
+            color: #1a202c;
+        }
+        .privacy-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 16px;
+        }
+        .privacy-section ul, .privacy-section ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+        .privacy-section li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 87, 217, 0.1), rgba(0, 53, 128, 0.1));
+            border-left: 4px solid #0057d9;
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+        .highlight-box h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #003580;
+            margin-bottom: 12px;
+        }
+        .contact-box {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        .contact-box h3 {
+            color: #003580;
+            margin-bottom: 16px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #1a202c;
+        }
+        .last-updated {
+            background: #10b981;
+            color: white;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .gdpr-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .data-category {
+            background: #f8fafc;
+            padding: 20px;
+            margin: 16px 0;
+            border-radius: 8px;
+            border-left: 4px solid #0057d9;
+        }
+        .data-category h4 {
+            color: #003580;
+            margin-bottom: 8px;
+        }
+        @media (max-width: 768px) {
+            .privacy-hero h1 {
+                font-size: 32px;
+            }
+            .privacy-section {
+                padding: 24px;
+            }
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <header class="header">
+     <div class="header-main">
+       <a href="index.html" class="logo">JustRelocation</a>
+
+       <nav class="nav-center">
+         <a href="index.html" class="nav-link">NHS Trusts</a>
+         <a href="housing.html" class="nav-link">Housing</a>
+         <a href="banking.html" class="nav-link">Banking</a>
+         <a href="registration.html" class="nav-link">Registration</a>
+         <a href="transport.html" class="nav-link">Transport</a>
+         <a href="schools.html" class="nav-link">Schools</a>
+         <a href="about.html" class="nav-link">About</a>
+         <a href="contact.html" class="nav-link">Contact</a>
+       </nav>
+
+       <div class="header-right">
+         <div class="notification-bell">
+           <span>🔔</span>
+           <span class="notification-dot"></span>
+         </div>
+         <a href="list-service.html" class="list-property-btn">List your service</a>
+         <div class="account-menu" onclick="toggleAccountDropdown()">
+           <div class="account-avatar">J</div>
+           <span>▼</span>
+           <div class="account-dropdown" id="accountDropdown">
+             <div class="dropdown-header">
+               <div class="user-info">
+                 <div class="user-name">John Smith</div>
+                 <div class="user-email">john.smith@nhs.uk</div>
+               </div>
+             </div>
+             <div class="dropdown-divider"></div>
+             <a href="my-profile.html" class="dropdown-item">
+               <i class="fas fa-user"></i>
+               <span>My Profile</span>
+             </a>
+             <a href="saved-services.html" class="dropdown-item">
+               <i class="fas fa-heart"></i>
+               <span>Saved Services</span>
+             </a>
+             <a href="support.html" class="dropdown-item">
+               <i class="fas fa-life-ring"></i>
+               <span>Help & Support</span>
+             </a>
+             <div class="dropdown-divider"></div>
+             <a href="provider-portal.html" class="dropdown-item">
+               <i class="fas fa-briefcase"></i>
+               <span>Provider Portal</span>
+             </a>
+             <div class="dropdown-divider"></div>
+             <a href="#" class="dropdown-item" onclick="logout()">
+               <i class="fas fa-sign-out-alt"></i>
+               <span>Sign Out</span>
+             </a>
+           </div>
+         </div>
+       </div>
+     </div>
+   </header>
+
+    <!-- Privacy Hero Section -->
+    <section class="privacy-hero">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Your data protection and privacy rights are fundamental to how we operate JustRelocation</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="privacy-content">
+        <div class="container">
+            <div class="gdpr-badge">
+                <i class="fas fa-shield-alt"></i>
+                GDPR Compliant
+            </div>
+
+            <div class="last-updated">
+                <strong>Last Updated:</strong> 16 September 2024 | <strong>Effective Date:</strong> 16 September 2024
+            </div>
+
+            <!-- Introduction -->
+            <section class="privacy-section">
+                <h2>1. Introduction</h2>
+                <p>JustRelocation Ltd ("we," "us," or "our") is committed to protecting and respecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our platform and services.</p>
+
+                <p>This policy applies to all users of our platform, including NHS healthcare workers seeking relocation services, service providers, and visitors to our website.</p>
+
+                <div class="highlight-box">
+                    <h4>Our Commitment</h4>
+                    <p>As a platform specifically designed for NHS healthcare workers, we understand the sensitive nature of healthcare-related information and maintain the highest standards of data protection in compliance with UK GDPR and Data Protection Act 2018.</p>
+                </div>
+
+                <h3>Controller Information</h3>
+                <div class="contact-box">
+                    <h3>Data Controller Details</h3>
+                    <p><strong>Company:</strong> JustRelocation Ltd</p>
+                    <p><strong>Registration:</strong> England & Wales Company No. [PENDING]</p>
+                    <p><strong>Address:</strong> 25 London Bridge Street, London SE1 9SG, United Kingdom</p>
+                    <p><strong>Data Protection Officer:</strong> privacy@justrelocation.com</p>
+                    <p><strong>ICO Registration:</strong> [PENDING]</p>
+                </div>
+            </section>
+
+            <!-- Information We Collect -->
+            <section class="privacy-section">
+                <h2>2. Information We Collect</h2>
+                <p>We collect information in several ways when you use our services:</p>
+
+                <div class="data-category">
+                    <h4>Personal Information You Provide</h4>
+                    <ul>
+                        <li>Contact details (name, email, phone number, address)</li>
+                        <li>Professional information (role, NHS trust, registration numbers)</li>
+                        <li>Identity verification documents (passport, visa, work permits)</li>
+                        <li>Financial information (for payment processing and credit checks)</li>
+                        <li>Housing preferences and requirements</li>
+                        <li>Emergency contact information</li>
+                        <li>Communication preferences</li>
+                    </ul>
+                </div>
+
+                <div class="data-category">
+                    <h4>Information We Collect Automatically</h4>
+                    <ul>
+                        <li>Device information (IP address, browser type, operating system)</li>
+                        <li>Usage data (pages visited, time spent, clickstream data)</li>
+                        <li>Location data (approximate location based on IP address)</li>
+                        <li>Cookies and tracking technologies data</li>
+                    </ul>
+                </div>
+
+                <div class="data-category">
+                    <h4>Information from Third Parties</h4>
+                    <ul>
+                        <li>Professional verification from regulatory bodies (NMC, GMC)</li>
+                        <li>Reference checks from previous employers or landlords</li>
+                        <li>Credit checks and financial verification</li>
+                        <li>Information from our partner service providers</li>
+                        <li>Social media information (only if you choose to link accounts)</li>
+                    </ul>
+                </div>
+
+                <div class="data-category">
+                    <h4>Special Categories of Personal Data</h4>
+                    <p>We may process special categories of personal data only where necessary and with appropriate safeguards:</p>
+                    <ul>
+                        <li>Health information (only for accommodation needs, e.g., accessibility requirements)</li>
+                        <li>Criminal convictions (only for DBS checks required by employers)</li>
+                        <li>Racial or ethnic origin (only for cultural/community matching services, if requested)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- How We Use Information -->
+            <section class="privacy-section">
+                <h2>3. How We Use Your Information</h2>
+                <p>We process your personal information based on the following lawful bases under UK GDPR:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Purpose</th>
+                                <th>Legal Basis</th>
+                                <th>Data Categories</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Platform registration and account management</td>
+                                <td>Contract performance</td>
+                                <td>Contact details, professional information</td>
+                            </tr>
+                            <tr>
+                                <td>Matching with service providers</td>
+                                <td>Contract performance</td>
+                                <td>Location, preferences, professional details</td>
+                            </tr>
+                            <tr>
+                                <td>Payment processing</td>
+                                <td>Contract performance</td>
+                                <td>Financial information, transaction data</td>
+                            </tr>
+                            <tr>
+                                <td>Customer support</td>
+                                <td>Contract performance</td>
+                                <td>Contact details, communication history</td>
+                            </tr>
+                            <tr>
+                                <td>Platform improvement and analytics</td>
+                                <td>Legitimate interests</td>
+                                <td>Usage data, aggregated statistics</td>
+                            </tr>
+                            <tr>
+                                <td>Marketing communications</td>
+                                <td>Consent</td>
+                                <td>Contact details, preferences</td>
+                            </tr>
+                            <tr>
+                                <td>Legal compliance and fraud prevention</td>
+                                <td>Legal obligation</td>
+                                <td>Identity documents, transaction data</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Marketing and Communications</h3>
+                <p>We will only send you marketing communications if you have explicitly consented. You can withdraw consent at any time by:</p>
+                <ul>
+                    <li>Clicking unsubscribe in any email</li>
+                    <li>Updating your preferences in your account settings</li>
+                    <li>Contacting us at privacy@justrelocation.com</li>
+                </ul>
+            </section>
+
+            <!-- Information Sharing -->
+            <section class="privacy-section">
+                <h2>4. Information Sharing and Disclosure</h2>
+                <p>We share your information only as necessary to provide our services and as permitted by law:</p>
+
+                <h3>Service Providers and Partners</h3>
+                <ul>
+                    <li><strong>Housing Providers:</strong> Contact details and housing requirements</li>
+                    <li><strong>Financial Services Partners:</strong> Financial information for account opening</li>
+                    <li><strong>Professional Registration Services:</strong> Qualification and identity information</li>
+                    <li><strong>Transport Providers:</strong> Location and travel requirements</li>
+                    <li><strong>Educational Institutions:</strong> Family information for school placements</li>
+                </ul>
+
+                <h3>Technology and Service Providers</h3>
+                <ul>
+                    <li>Cloud hosting providers (within UK/EU)</li>
+                    <li>Payment processors (Stripe, with appropriate safeguards)</li>
+                    <li>Communication platforms (WhatsApp Business, with encryption)</li>
+                    <li>Analytics providers (anonymized data only)</li>
+                    <li>Security and fraud prevention services</li>
+                </ul>
+
+                <h3>Legal Requirements</h3>
+                <p>We may disclose information when required by law or to:</p>
+                <ul>
+                    <li>Comply with legal obligations or court orders</li>
+                    <li>Protect our legal rights or the safety of users</li>
+                    <li>Prevent fraud or illegal activities</li>
+                    <li>Cooperate with law enforcement investigations</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h4>International Transfers</h4>
+                    <p>We primarily process data within the UK/EU. Any international transfers are protected by appropriate safeguards such as Standard Contractual Clauses or adequacy decisions. We will inform you of any such transfers and the safeguards in place.</p>
+                </div>
+            </section>
+
+            <!-- Data Security -->
+            <section class="privacy-section">
+                <h2>5. Data Security</h2>
+                <p>We implement comprehensive security measures to protect your personal information:</p>
+
+                <h3>Technical Safeguards</h3>
+                <ul>
+                    <li>SSL/TLS encryption for all data in transit</li>
+                    <li>AES-256 encryption for sensitive data at rest</li>
+                    <li>Multi-factor authentication for admin access</li>
+                    <li>Regular security assessments and penetration testing</li>
+                    <li>Secure cloud infrastructure with UK/EU data residency</li>
+                </ul>
+
+                <h3>Organizational Safeguards</h3>
+                <ul>
+                    <li>Access controls and role-based permissions</li>
+                    <li>Regular staff training on data protection</li>
+                    <li>Data processing agreements with all third parties</li>
+                    <li>Incident response and breach notification procedures</li>
+                    <li>Regular audits and compliance reviews</li>
+                </ul>
+
+                <h3>Data Breach Response</h3>
+                <p>In the event of a data breach, we will:</p>
+                <ul>
+                    <li>Notify the ICO within 72 hours if required</li>
+                    <li>Inform affected individuals without undue delay</li>
+                    <li>Take immediate steps to contain and remedy the breach</li>
+                    <li>Conduct a full investigation and implement preventive measures</li>
+                </ul>
+            </section>
+
+            <!-- Data Retention -->
+            <section class="privacy-section">
+                <h2>6. Data Retention</h2>
+                <p>We retain personal information only as long as necessary for the purposes outlined in this policy:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data Type</th>
+                                <th>Retention Period</th>
+                                <th>Justification</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Account information</td>
+                                <td>Active account + 2 years</td>
+                                <td>Service provision and legal compliance</td>
+                            </tr>
+                            <tr>
+                                <td>Transaction records</td>
+                                <td>7 years</td>
+                                <td>Financial regulations and tax requirements</td>
+                            </tr>
+                            <tr>
+                                <td>Communication records</td>
+                                <td>3 years</td>
+                                <td>Customer service and dispute resolution</td>
+                            </tr>
+                            <tr>
+                                <td>Marketing consent</td>
+                                <td>Until withdrawn</td>
+                                <td>Ongoing consent management</td>
+                            </tr>
+                            <tr>
+                                <td>Website analytics</td>
+                                <td>26 months</td>
+                                <td>Platform improvement (anonymized)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>After the retention period expires, we securely delete or anonymize personal information unless required to retain it by law.</p>
+            </section>
+
+            <!-- Your Rights -->
+            <section class="privacy-section">
+                <h2>7. Your Rights Under UK GDPR</h2>
+                <p>You have the following rights regarding your personal information:</p>
+
+                <div class="data-category">
+                    <h4>Right of Access (Article 15)</h4>
+                    <p>Request a copy of the personal information we hold about you, including details about how it's processed.</p>
+                </div>
+
+                <div class="data-category">
+                    <h4>Right to Rectification (Article 16)</h4>
+                    <p>Request correction of inaccurate or incomplete personal information.</p>
+                </div>
+
+                <div class="data-category">
+                    <h4>Right to Erasure (Article 17)</h4>
+                    <p>Request deletion of your personal information in certain circumstances, such as when it's no longer necessary for the original purpose.</p>
+                </div>
+
+                <div class="data-category">
+                    <h4>Right to Restrict Processing (Article 18)</h4>
+                    <p>Request that we limit how we use your personal information in certain circumstances.</p>
+                </div>
+
+                <div class="data-category">
+                    <h4>Right to Data Portability (Article 20)</h4>
+                    <p>Receive your personal information in a structured, machine-readable format or have it transferred to another controller.</p>
+                </div>
+
+                <div class="data-category">
+                    <h4>Right to Object (Article 21)</h4>
+                    <p>Object to processing based on legitimate interests or for direct marketing purposes.</p>
+                </div>
+
+                <div class="data-category">
+                    <h4>Rights Related to Automated Decision-Making (Article 22)</h4>
+                    <p>Not be subject to decisions based solely on automated processing, including profiling, that produce legal effects.</p>
+                </div>
+
+                <h3>Exercising Your Rights</h3>
+                <p>To exercise any of these rights, contact us at:</p>
+                <ul>
+                    <li>Email: privacy@justrelocation.com</li>
+                    <li>Phone: +44 207 123 4567</li>
+                    <li>Post: Data Protection Officer, JustRelocation Ltd, 25 London Bridge Street, London SE1 9SG</li>
+                </ul>
+
+                <p>We will respond within one month and may request identity verification. If you're unsatisfied with our response, you can complain to the Information Commissioner's Office (ICO).</p>
+            </section>
+
+            <!-- Cookies -->
+            <section class="privacy-section">
+                <h2>8. Cookies and Tracking Technologies</h2>
+                <p>We use cookies and similar technologies to enhance your experience:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cookie Type</th>
+                                <th>Purpose</th>
+                                <th>Duration</th>
+                                <th>Consent Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Essential</td>
+                                <td>Platform functionality and security</td>
+                                <td>Session</td>
+                                <td>No</td>
+                            </tr>
+                            <tr>
+                                <td>Performance</td>
+                                <td>Analytics and platform optimization</td>
+                                <td>26 months</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Functional</td>
+                                <td>Remember preferences and settings</td>
+                                <td>12 months</td>
+                                <td>Yes</td>
+                            </tr>
+                            <tr>
+                                <td>Marketing</td>
+                                <td>Targeted advertising and tracking</td>
+                                <td>12 months</td>
+                                <td>Yes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>You can manage cookie preferences through your browser settings or our cookie consent banner. Note that disabling certain cookies may impact platform functionality.</p>
+            </section>
+
+            <!-- Children's Privacy -->
+            <section class="privacy-section">
+                <h2>9. Children's Privacy</h2>
+                <p>Our platform is not intended for children under 16. We do not knowingly collect personal information from children under 16 without parental consent.</p>
+
+                <p>If you believe we have inadvertently collected information from a child under 16, please contact us immediately so we can delete it.</p>
+
+                <p>For family services (school enrollment), we only process children's information with explicit parental consent and for the specific purpose of service provision.</p>
+            </section>
+
+            <!-- Changes to Policy -->
+            <section class="privacy-section">
+                <h2>10. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements.</p>
+
+                <p>We will notify you of significant changes by:</p>
+                <ul>
+                    <li>Email notification to registered users</li>
+                    <li>Prominent notice on our platform</li>
+                    <li>Updated "Last Modified" date</li>
+                </ul>
+
+                <p>Continued use of our platform after changes indicates acceptance of the updated policy.</p>
+            </section>
+
+            <!-- Contact Information -->
+            <section class="privacy-section">
+                <h2>11. Contact Us</h2>
+                <div class="contact-box">
+                    <h3>Privacy Questions and Concerns</h3>
+                    <p><strong>Data Protection Officer:</strong></p>
+                    <p>Email: privacy@justrelocation.com</p>
+                    <p>Phone: +44 207 123 4567</p>
+                    <p>Address: JustRelocation Ltd, 25 London Bridge Street, London SE1 9SG, United Kingdom</p>
+
+                    <p><strong>Response Time:</strong> We aim to respond to all privacy inquiries within 48 hours.</p>
+
+                    <h4>Regulatory Authority</h4>
+                    <p>You have the right to lodge a complaint with the Information Commissioner's Office (ICO):</p>
+                    <p>Website: www.ico.org.uk</p>
+                    <p>Phone: 0303 123 1113</p>
+                    <p>Address: Information Commissioner's Office, Wycliffe House, Water Lane, Wilmslow, Cheshire SK9 5AF</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="background: #1a202c; color: white; padding: 60px 0 30px; margin-top: 80px;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h4 style="margin-bottom: 20px; color: #0057d9;">Data Protection</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="privacy.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Privacy Policy</a></li>
+                        <li style="margin-bottom: 8px;"><a href="terms.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Terms of Service</a></li>
+                        <li style="margin-bottom: 8px;"><a href="mailto:privacy@justrelocation.com" style="color: rgba(255,255,255,0.7); text-decoration: none;">privacy@justrelocation.com</a></li>
+                        <li style="margin-bottom: 8px;"><span style="color: rgba(255,255,255,0.7);">GDPR Compliant</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px; color: #0057d9;">Your Rights</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><span style="color: rgba(255,255,255,0.7);">Access Your Data</span></li>
+                        <li style="margin-bottom: 8px;"><span style="color: rgba(255,255,255,0.7);">Update Information</span></li>
+                        <li style="margin-bottom: 8px;"><span style="color: rgba(255,255,255,0.7);">Delete Account</span></li>
+                        <li style="margin-bottom: 8px;"><span style="color: rgba(255,255,255,0.7);">Data Portability</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="margin-bottom: 20px; color: #0057d9;">Contact</h4>
+                    <ul style="list-style: none;">
+                        <li style="margin-bottom: 8px;"><a href="contact.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Contact Form</a></li>
+                        <li style="margin-bottom: 8px;"><a href="tel:+442071234567" style="color: rgba(255,255,255,0.7); text-decoration: none;">+44 207 123 4567</a></li>
+                        <li style="margin-bottom: 8px;"><span style="color: rgba(255,255,255,0.7);">24/7 Support</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center;">
+                <div style="color: rgba(255,255,255,0.5);">© 2024 JustRelocation Ltd. Protecting NHS healthcare worker data with the highest standards.</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Support Chat -->
+    <div class="whatsapp-chat" onclick="openSupportChat()">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="chat-tooltip">
+            <span>Need help? Chat with us!</span>
+        </div>
+    </div>
+
+    <script>
+        function openSupportChat() {
+            window.open('https://wa.me/447000000000?text=Hi%20JustRelocation,%20I%20need%20help%20with...', '_blank');
+        }
+    </script>
+
+    <script>
+        // Account Menu Dropdown
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const accountMenu = document.querySelector('.account-menu');
+            const dropdown = document.getElementById('accountDropdown');
+
+            if (!accountMenu.contains(event.target)) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // Logout function
+        function logout() {
+            alert('Logging out...');
+            // In a real app, this would clear session/tokens and redirect to login
+        }
+    </script>
+</body>
+</html>

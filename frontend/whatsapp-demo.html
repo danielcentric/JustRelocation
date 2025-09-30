@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Integration Demo - NHS Service Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #005EB8 0%, #0072CE 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .demo-header {
+            background: linear-gradient(135deg, #005EB8, #0072CE);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .demo-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .demo-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .demo-content {
+            padding: 40px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            border: 1px solid #e9ecef;
+        }
+
+        .demo-section h3 {
+            color: #005EB8;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .demo-button:hover {
+            background: #20ba57;
+        }
+
+        .demo-button.secondary {
+            background: #6c757d;
+        }
+
+        .demo-button.secondary:hover {
+            background: #5a6268;
+        }
+
+        .demo-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .status-display {
+            background: #e7f3ff;
+            border: 1px solid #b8d4f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .status-display h4 {
+            color: #005EB8;
+            margin-bottom: 10px;
+        }
+
+        .log-container {
+            background: #f1f3f4;
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            border-radius: 3px;
+        }
+
+        .log-entry.sent {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+        }
+
+        .log-entry.received {
+            background: #d1ecf1;
+            border-left: 3px solid #17a2b8;
+        }
+
+        .log-entry.error {
+            background: #f8d7da;
+            border-left: 3px solid #dc3545;
+        }
+
+        .connection-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .connection-status.connected {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .connection-status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: #25D366;
+            margin-bottom: 15px;
+        }
+
+        .webhook-simulator {
+            border: 2px dashed #25D366;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            background: #f0fff4;
+        }
+
+        .webhook-simulator h4 {
+            color: #25D366;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-header h1 {
+                font-size: 2rem;
+            }
+
+            .demo-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1><i class="fab fa-whatsapp"></i> WhatsApp Business API Integration</h1>
+            <p>NHS Service Hub - Real-time Communication Platform</p>
+            <div class="connection-status" id="connectionStatus">
+                <i class="fas fa-circle"></i> Initializing...
+            </div>
+        </div>
+
+        <div class="demo-content">
+            <div class="demo-grid">
+                <!-- Customer Booking Demo -->
+                <div class="demo-section">
+                    <h3><i class="fas fa-user-md"></i> Customer Booking Flow</h3>
+                    <p>Simulate a customer booking a service and receiving WhatsApp confirmations.</p>
+
+                    <input type="text" class="demo-input" id="customerName" placeholder="Customer Name" value="Dr. Sarah Johnson">
+                    <input type="tel" class="demo-input" id="customerPhone" placeholder="Customer WhatsApp" value="+447700123456">
+                    <select class="demo-input" id="serviceType">
+                        <option>Temporary Accommodation</option>
+                        <option>Vehicle Rental</option>
+                        <option>Moving Services</option>
+                        <option>Utility Setup</option>
+                    </select>
+
+                    <button class="demo-button" onclick="simulateBooking()">
+                        <i class="fab fa-whatsapp"></i> Simulate Booking & WhatsApp Notification
+                    </button>
+                </div>
+
+                <!-- Vendor Lead Management -->
+                <div class="demo-section">
+                    <h3><i class="fas fa-store"></i> Vendor Lead Notifications</h3>
+                    <p>Send lead alerts to vendors and process their WhatsApp responses.</p>
+
+                    <input type="tel" class="demo-input" id="vendorPhone" placeholder="Vendor WhatsApp" value="+447700654321">
+                    <input type="text" class="demo-input" id="leadId" placeholder="Lead ID" value="lead_001">
+
+                    <button class="demo-button" onclick="sendLeadNotification()">
+                        <i class="fas fa-bell"></i> Send Lead Alert
+                    </button>
+
+                    <button class="demo-button secondary" onclick="simulateLeadAcceptance()">
+                        <i class="fas fa-check"></i> Simulate "ACCEPT" Response
+                    </button>
+                </div>
+
+                <!-- Message Templates -->
+                <div class="demo-section">
+                    <h3><i class="fas fa-comments"></i> Message Templates</h3>
+                    <p>Test pre-configured WhatsApp message templates.</p>
+
+                    <button class="demo-button" onclick="sendWelcomeMessage()">
+                        <i class="fas fa-hand-wave"></i> Welcome Message
+                    </button>
+
+                    <button class="demo-button" onclick="sendStatusUpdate()">
+                        <i class="fas fa-chart-line"></i> Status Update
+                    </button>
+
+                    <button class="demo-button" onclick="sendHelpMessage()">
+                        <i class="fas fa-question-circle"></i> Help Commands
+                    </button>
+                </div>
+
+                <!-- Real-time Chat Simulation -->
+                <div class="demo-section">
+                    <h3><i class="fas fa-comments-dollar"></i> Two-way Communication</h3>
+                    <p>Simulate customer-vendor conversations via WhatsApp.</p>
+
+                    <input type="text" class="demo-input" id="customMessage" placeholder="Custom message to send">
+                    <input type="tel" class="demo-input" id="recipientPhone" placeholder="Recipient WhatsApp" value="+447700987654">
+
+                    <button class="demo-button" onclick="sendCustomMessage()">
+                        <i class="fas fa-paper-plane"></i> Send Custom Message
+                    </button>
+
+                    <button class="demo-button secondary" onclick="openWhatsAppWeb()">
+                        <i class="fab fa-whatsapp"></i> Open WhatsApp Web
+                    </button>
+                </div>
+            </div>
+
+            <!-- Webhook Simulator -->
+            <div class="webhook-simulator">
+                <h4><i class="fas fa-webhook"></i> Incoming Message Simulator</h4>
+                <p>Simulate incoming WhatsApp messages to test automated responses:</p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 15px;">
+                    <button class="demo-button" onclick="simulateIncomingMessage('ACCEPT lead_001')">
+                        "ACCEPT lead_001"
+                    </button>
+                    <button class="demo-button" onclick="simulateIncomingMessage('INFO lead_002')">
+                        "INFO lead_002"
+                    </button>
+                    <button class="demo-button" onclick="simulateIncomingMessage('STATUS')">
+                        "STATUS"
+                    </button>
+                    <button class="demo-button" onclick="simulateIncomingMessage('HELP')">
+                        "HELP"
+                    </button>
+                </div>
+            </div>
+
+            <!-- Integration Status -->
+            <div class="status-display">
+                <h4><i class="fas fa-info-circle"></i> Integration Status</h4>
+                <div id="integrationStatus">
+                    <p><strong>Service Status:</strong> <span id="serviceStatus">Initializing...</span></p>
+                    <p><strong>Phone Number ID:</strong> <span id="phoneNumberId">Loading...</span></p>
+                    <p><strong>Webhook Status:</strong> <span id="webhookStatus">Setting up...</span></p>
+                    <p><strong>Messages Sent:</strong> <span id="messagesSent">0</span></p>
+                    <p><strong>Messages Received:</strong> <span id="messagesReceived">0</span></p>
+                </div>
+            </div>
+
+            <!-- Activity Log -->
+            <div class="demo-section" style="grid-column: 1 / -1;">
+                <h3><i class="fas fa-history"></i> Activity Log</h3>
+                <div class="log-container" id="activityLog">
+                    <div class="log-entry">WhatsApp Integration Demo loaded...</div>
+                </div>
+                <button class="demo-button secondary" onclick="clearLog()" style="width: auto; margin-top: 10px;">
+                    <i class="fas fa-trash"></i> Clear Log
+                </button>
+            </div>
+
+            <!-- Features Overview -->
+            <div style="margin-top: 40px;">
+                <h2 style="text-align: center; color: #005EB8; margin-bottom: 30px;">
+                    Integration Features
+                </h2>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-bolt"></i>
+                        <h4>Instant Notifications</h4>
+                        <p>Real-time alerts for new bookings, lead updates, and customer inquiries</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h4>Smart Auto-Responses</h4>
+                        <p>Automated replies based on message content and business hours</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-handshake"></i>
+                        <h4>Lead Management</h4>
+                        <p>Accept leads, request info, and manage pipeline via WhatsApp</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <h4>Status Updates</h4>
+                        <p>Get real-time status on bookings, earnings, and performance</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Business API</h4>
+                        <p>Official WhatsApp Business API with verified business profile</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <i class="fas fa-users"></i>
+                        <h4>Multi-user Support</h4>
+                        <p>Support for both healthcare workers and service vendors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="whatsapp-config.js"></script>
+    <script src="whatsapp-service.js"></script>
+    <script src="whatsapp-webhook.js"></script>
+
+    <script>
+        let whatsAppDemo;
+        let messagesSent = 0;
+        let messagesReceived = 0;
+
+        class WhatsAppDemo {
+            constructor() {
+                this.whatsappService = new WhatsAppService();
+                this.whatsappConfig = new WhatsAppConfig();
+                this.webhookHandler = new WhatsAppWebhookHandler();
+
+                this.init();
+            }
+
+            async init() {
+                try {
+                    this.logActivity('Initializing WhatsApp services...', 'info');
+
+                    // Initialize services
+                    const config = this.whatsappConfig.getConfig();
+                    await this.whatsappService.initialize(config.phoneNumberId, config.accessToken);
+
+                    // Update status display
+                    this.updateStatus();
+
+                    this.logActivity('WhatsApp Business API initialized successfully!', 'success');
+
+                    // Set connection status
+                    const connectionStatus = document.getElementById('connectionStatus');
+                    connectionStatus.className = 'connection-status connected';
+                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Connected';
+
+                } catch (error) {
+                    this.logActivity(`Error initializing WhatsApp services: ${error.message}`, 'error');
+
+                    const connectionStatus = document.getElementById('connectionStatus');
+                    connectionStatus.className = 'connection-status disconnected';
+                    connectionStatus.innerHTML = '<i class="fas fa-circle"></i> Connection Failed';
+                }
+            }
+
+            updateStatus() {
+                const config = this.whatsappConfig.getConfig();
+
+                document.getElementById('serviceStatus').textContent = 'Active';
+                document.getElementById('phoneNumberId').textContent = config.phoneNumberId;
+                document.getElementById('webhookStatus').textContent = 'Listening';
+                document.getElementById('messagesSent').textContent = messagesSent;
+                document.getElementById('messagesReceived').textContent = messagesReceived;
+            }
+
+            logActivity(message, type = 'info') {
+                const log = document.getElementById('activityLog');
+                const timestamp = new Date().toLocaleTimeString();
+                const entry = document.createElement('div');
+                entry.className = `log-entry ${type}`;
+                entry.innerHTML = `[${timestamp}] ${message}`;
+                log.appendChild(entry);
+                log.scrollTop = log.scrollHeight;
+            }
+        }
+
+        // Demo Functions
+        async function simulateBooking() {
+            const customerName = document.getElementById('customerName').value;
+            const customerPhone = document.getElementById('customerPhone').value;
+            const serviceType = document.getElementById('serviceType').value;
+
+            whatsAppDemo.logActivity(`Simulating booking for ${customerName}...`, 'info');
+
+            try {
+                await whatsAppDemo.whatsappService.sendBookingConfirmation(
+                    customerPhone,
+                    'Premium Accommodations Ltd',
+                    serviceType,
+                    {
+                        date: '2024-01-15',
+                        time: '2:00 PM',
+                        location: 'Central London',
+                        price: '1,200',
+                        reference: 'BOOK_' + Date.now()
+                    }
+                );
+
+                messagesSent++;
+                whatsAppDemo.updateStatus();
+                whatsAppDemo.logActivity(`Booking confirmation sent to ${customerPhone}`, 'sent');
+
+            } catch (error) {
+                whatsAppDemo.logActivity(`Error sending booking confirmation: ${error.message}`, 'error');
+            }
+        }
+
+        async function sendLeadNotification() {
+            const vendorPhone = document.getElementById('vendorPhone').value;
+            const leadId = document.getElementById('leadId').value;
+
+            whatsAppDemo.logActivity(`Sending lead notification to vendor...`, 'info');
+
+            try {
+                await whatsAppDemo.whatsappService.sendVendorNotification(vendorPhone, {
+                    name: 'Dr. Sarah Johnson',
+                    hospital: 'St Thomas\' Hospital',
+                    serviceType: 'Temporary Accommodation',
+                    score: 92,
+                    preferredDate: '2024-01-15',
+                    budget: '£1,200-£1,500',
+                    id: leadId,
+                    priority: 'urgent'
+                });
+
+                messagesSent++;
+                whatsAppDemo.updateStatus();
+                whatsAppDemo.logActivity(`Lead notification sent to ${vendorPhone}`, 'sent');
+
+            } catch (error) {
+                whatsAppDemo.logActivity(`Error sending lead notification: ${error.message}`, 'error');
+            }
+        }
+
+        async function simulateLeadAcceptance() {
+            const leadId = document.getElementById('leadId').value;
+
+            whatsAppDemo.logActivity(`Simulating lead acceptance for ${leadId}...`, 'info');
+
+            // Simulate incoming message
+            await whatsAppDemo.webhookHandler.processIncomingMessage({
+                from: '+447700654321',
+                text: { body: `ACCEPT ${leadId}` },
+                type: 'text',
+                timestamp: Date.now()
+            });
+
+            messagesReceived++;
+            whatsAppDemo.updateStatus();
+            whatsAppDemo.logActivity(`Processed lead acceptance for ${leadId}`, 'received');
+        }
+
+        async function sendWelcomeMessage() {
+            const phone = '+447700123456';
+
+            try {
+                await whatsAppDemo.whatsappService.sendMessage(
+                    phone,
+                    `🏥 Welcome to NHS Service Hub!\n\nThank you for joining our platform. We're here to connect you with trusted service providers.\n\nQuick Commands:\n📋 Reply STATUS for updates\n🆘 Reply HELP for assistance\n\nLet's get started!`
+                );
+
+                messagesSent++;
+                whatsAppDemo.updateStatus();
+                whatsAppDemo.logActivity(`Welcome message sent to ${phone}`, 'sent');
+
+            } catch (error) {
+                whatsAppDemo.logActivity(`Error sending welcome message: ${error.message}`, 'error');
+            }
+        }
+
+        async function sendStatusUpdate() {
+            const phone = '+447700654321';
+
+            try {
+                await whatsAppDemo.whatsappService.sendMessage(
+                    phone,
+                    `📊 Your NHS Service Hub Status\n\n🔄 Active Leads: 5\n✅ Completed Jobs: 23\n💰 This Month: £3,450\n⭐ Rating: 4.8/5\n\nGreat work! 👏`
+                );
+
+                messagesSent++;
+                whatsAppDemo.updateStatus();
+                whatsAppDemo.logActivity(`Status update sent to ${phone}`, 'sent');
+
+            } catch (error) {
+                whatsAppDemo.logActivity(`Error sending status update: ${error.message}`, 'error');
+            }
+        }
+
+        async function sendHelpMessage() {
+            const phone = '+447700987654';
+
+            try {
+                await whatsAppDemo.whatsappService.sendHelpMessage(phone);
+
+                messagesSent++;
+                whatsAppDemo.updateStatus();
+                whatsAppDemo.logActivity(`Help message sent to ${phone}`, 'sent');
+
+            } catch (error) {
+                whatsAppDemo.logActivity(`Error sending help message: ${error.message}`, 'error');
+            }
+        }
+
+        async function sendCustomMessage() {
+            const message = document.getElementById('customMessage').value;
+            const phone = document.getElementById('recipientPhone').value;
+
+            if (!message || !phone) {
+                alert('Please enter both message and phone number');
+                return;
+            }
+
+            try {
+                await whatsAppDemo.whatsappService.sendMessage(phone, message);
+
+                messagesSent++;
+                whatsAppDemo.updateStatus();
+                whatsAppDemo.logActivity(`Custom message sent to ${phone}: "${message}"`, 'sent');
+
+                // Clear input
+                document.getElementById('customMessage').value = '';
+
+            } catch (error) {
+                whatsAppDemo.logActivity(`Error sending custom message: ${error.message}`, 'error');
+            }
+        }
+
+        function openWhatsAppWeb() {
+            const phone = document.getElementById('recipientPhone').value;
+            const message = "Hi! I'm contacting you through NHS Service Hub. How can I help you today?";
+
+            const whatsappUrl = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+
+            whatsAppDemo.logActivity(`Opened WhatsApp Web for ${phone}`, 'info');
+        }
+
+        async function simulateIncomingMessage(messageText) {
+            whatsAppDemo.logActivity(`Simulating incoming message: "${messageText}"`, 'info');
+
+            await whatsAppDemo.webhookHandler.processIncomingMessage({
+                from: '+447700111222',
+                text: { body: messageText },
+                type: 'text',
+                timestamp: Date.now()
+            });
+
+            messagesReceived++;
+            whatsAppDemo.updateStatus();
+            whatsAppDemo.logActivity(`Processed incoming message: "${messageText}"`, 'received');
+        }
+
+        function clearLog() {
+            const log = document.getElementById('activityLog');
+            log.innerHTML = '<div class="log-entry">Activity log cleared...</div>';
+        }
+
+        // Initialize demo when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            whatsAppDemo = new WhatsAppDemo();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Services - JustRelocation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="expedia-style.css">
+    <style>
+        .saved-container {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+        }
+
+        .saved-header {
+            margin-bottom: 40px;
+        }
+
+        .saved-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .saved-header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .saved-filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            padding: 10px 20px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-chip.active {
+            background: #0057d9;
+            color: white;
+            border-color: #0057d9;
+        }
+
+        .filter-chip:hover {
+            border-color: #0057d9;
+        }
+
+        .saved-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .saved-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .saved-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .saved-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .saved-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-favorite {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .remove-favorite i {
+            color: #dc2626;
+            font-size: 18px;
+        }
+
+        .remove-favorite:hover {
+            transform: scale(1.1);
+            background: #dc2626;
+        }
+
+        .remove-favorite:hover i {
+            color: white;
+        }
+
+        .saved-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 87, 217, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .saved-content {
+            padding: 20px;
+        }
+
+        .saved-category {
+            color: #0057d9;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .saved-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .saved-description {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .saved-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .saved-distance {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        .saved-rating {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffc107;
+            font-weight: 600;
+        }
+
+        .view-button {
+            width: 100%;
+            padding: 12px;
+            background: #0057d9;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 12px;
+        }
+
+        .view-button:hover {
+            background: #003d99;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: #e9ecef;
+            margin-bottom: 24px;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: #6c757d;
+            margin-bottom: 24px;
+        }
+
+        .empty-state .browse-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: #0057d9;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .empty-state .browse-button:hover {
+            background: #003d99;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .saved-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .saved-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-main">
+            <a href="index.html" class="logo">JustRelocation</a>
+
+            <nav class="nav-center">
+                <a href="index.html" class="nav-link">NHS Trusts</a>
+                <a href="housing.html" class="nav-link">Housing</a>
+                <a href="banking.html" class="nav-link">Banking</a>
+                <a href="registration.html" class="nav-link">Registration</a>
+                <a href="transport.html" class="nav-link">Transport</a>
+                <a href="schools.html" class="nav-link">Schools</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="header-right">
+                <div class="notification-bell">
+                    <span>🔔</span>
+                    <span class="notification-dot"></span>
+                </div>
+                <a href="list-service.html" class="list-property-btn">List your service</a>
+                <div class="account-menu" onclick="toggleAccountDropdown()">
+                    <div class="account-avatar">J</div>
+                    <span>▼</span>
+                    <div class="account-dropdown" id="accountDropdown">
+                        <div class="dropdown-header">
+                            <div class="user-info">
+                                <div class="user-name">John Smith</div>
+                                <div class="user-email">john.smith@nhs.uk</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="my-profile.html" class="dropdown-item">
+                            <i class="fas fa-user"></i>
+                            <span>My Profile</span>
+                        </a>
+                        <a href="saved-services.html" class="dropdown-item">
+                            <i class="fas fa-heart"></i>
+                            <span>Saved Services</span>
+                        </a>
+                        <a href="support.html" class="dropdown-item">
+                            <i class="fas fa-life-ring"></i>
+                            <span>Help & Support</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="provider-portal.html" class="dropdown-item">
+                            <i class="fas fa-briefcase"></i>
+                            <span>Provider Portal</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="saved-container">
+        <div class="saved-header">
+            <h1><i class="fas fa-heart" style="color: #dc2626;"></i> Saved Services</h1>
+            <p>Your favorite services and providers for easy access</p>
+        </div>
+
+        <div class="saved-filters">
+            <div class="filter-chip active" onclick="filterServices('all')">All (12)</div>
+            <div class="filter-chip" onclick="filterServices('housing')">Housing (4)</div>
+            <div class="filter-chip" onclick="filterServices('transport')">Transport (3)</div>
+            <div class="filter-chip" onclick="filterServices('banking')">Banking (2)</div>
+            <div class="filter-chip" onclick="filterServices('restaurants')">Restaurants (2)</div>
+            <div class="filter-chip" onclick="filterServices('gyms')">Gyms (1)</div>
+        </div>
+
+        <div class="saved-grid" id="savedGrid">
+            <!-- Saved Service Cards -->
+            <div class="saved-card" data-category="housing">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400" alt="Premier Inn">
+                    <span class="saved-badge">Housing</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Hotel / Temporary Accommodation</div>
+                    <div class="saved-name">Premier Inn London Bridge</div>
+                    <div class="saved-description">Comfortable rooms with breakfast, perfect for new NHS arrivals</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.3 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.5
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='guys-hospital.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="transport">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1581274142427-3d28c9c7c8e8?w=400" alt="London Bridge Station">
+                    <span class="saved-badge">Transport</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Public Transport</div>
+                    <div class="saved-name">London Bridge Station</div>
+                    <div class="saved-description">Major transport hub with Northern, Jubilee lines and National Rail</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.2 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.7
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='transport.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="banking">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1541354329998-f4d9a9f9297f?w=400" alt="HSBC">
+                    <span class="saved-badge">Banking</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Bank</div>
+                    <div class="saved-name">HSBC London Bridge</div>
+                    <div class="saved-description">Full banking services with NHS-specific accounts and benefits</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.4 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.3
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='banking.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="restaurants">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400" alt="Restaurant">
+                    <span class="saved-badge">Restaurants</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Restaurant</div>
+                    <div class="saved-name">Borough Market Kitchen</div>
+                    <div class="saved-description">Fresh, healthy meals with NHS staff discount available</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.5 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.8
+                        </div>
+                    </div>
+                    <button class="view-button">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="housing">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400" alt="Apartment">
+                    <span class="saved-badge">Housing</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Apartment</div>
+                    <div class="saved-name">Modern 1-Bed Flat SE1</div>
+                    <div class="saved-description">Furnished flat near Guy's Hospital, available immediately</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.6 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.6
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='housing.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="gyms">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400" alt="Gym">
+                    <span class="saved-badge">Gyms</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Fitness</div>
+                    <div class="saved-name">PureGym London Bridge</div>
+                    <div class="saved-description">24/7 access gym with NHS staff discounts available</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.3 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.4
+                        </div>
+                    </div>
+                    <button class="view-button">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="transport">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400" alt="Car Rental">
+                    <span class="saved-badge">Transport</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Car Rental</div>
+                    <div class="saved-name">Enterprise Rent-A-Car</div>
+                    <div class="saved-description">Flexible car rental with NHS professional rates</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.7 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.5
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='transport.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="banking">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400" alt="Barclays">
+                    <span class="saved-badge">Banking</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Bank</div>
+                    <div class="saved-name">Barclays Borough</div>
+                    <div class="saved-description">Personal banking with dedicated NHS account manager</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.5 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.2
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='banking.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="housing">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400" alt="Hotel">
+                    <span class="saved-badge">Housing</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Hotel</div>
+                    <div class="saved-name">Travelodge Southwark</div>
+                    <div class="saved-description">Budget-friendly accommodation for NHS staff</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.8 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.0
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='guys-hospital.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="restaurants">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400" alt="Cafe">
+                    <span class="saved-badge">Restaurants</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Cafe</div>
+                    <div class="saved-name">Monmouth Coffee</div>
+                    <div class="saved-description">Quality coffee and breakfast near the hospital</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.4 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.9
+                        </div>
+                    </div>
+                    <button class="view-button">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="transport">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1571781418606-70265b9cce90?w=400" alt="Bike">
+                    <span class="saved-badge">Transport</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">Bike Share</div>
+                    <div class="saved-name">Santander Cycles Docking Station</div>
+                    <div class="saved-description">Convenient bike share right outside Guy's Hospital</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            0.1 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.6
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='transport.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="saved-card" data-category="housing">
+                <div class="saved-image">
+                    <img src="https://images.unsplash.com/photo-1502672260066-6bc344c2234a?w=400" alt="Share">
+                    <span class="saved-badge">Housing</span>
+                    <button class="remove-favorite" onclick="removeFavorite(this)">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="saved-content">
+                    <div class="saved-category">House Share</div>
+                    <div class="saved-name">NHS Professionals House Share</div>
+                    <div class="saved-description">Shared house with other healthcare workers</div>
+                    <div class="saved-meta">
+                        <div class="saved-distance">
+                            <i class="fas fa-map-marker-alt"></i>
+                            1.2 miles
+                        </div>
+                        <div class="saved-rating">
+                            <i class="fas fa-star"></i>
+                            4.7
+                        </div>
+                    </div>
+                    <button class="view-button" onclick="window.location.href='housing.html'">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <i class="fas fa-heart-broken"></i>
+            <h3>No Saved Services</h3>
+            <p>Start saving your favorite services to access them quickly here</p>
+            <a href="index.html" class="browse-button">Browse Services</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h4 class="logo">JustRelocation</h4>
+                    <p>Supporting NHS professionals with their relocation journey across the UK. Find trusted services, accommodation, and essential resources near your NHS workplace.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For NHS Workers</h4>
+                    <ul>
+                        <li><a href="index.html">Find NHS Trusts</a></li>
+                        <li><a href="housing.html">Housing</a></li>
+                        <li><a href="banking.html">Banking</a></li>
+                        <li><a href="registration.html">GP Registration</a></li>
+                        <li><a href="transport.html">Transport</a></li>
+                        <li><a href="schools.html">Schools</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Service Providers</h4>
+                    <ul>
+                        <li><a href="list-service.html">List Your Service</a></li>
+                        <li><a href="provider-portal.html">Provider Portal</a></li>
+                        <li><a href="vendor-registration.html">Register as Vendor</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="support.html">Help & Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 JustRelocation. All rights reserved.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Support Chat -->
+    <div class="whatsapp-chat" onclick="openSupportChat()">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="chat-tooltip">
+            <span>Need help? Chat with us!</span>
+        </div>
+    </div>
+
+    <script>
+        function openSupportChat() {
+            window.open('https://wa.me/447000000000?text=Hi%20JustRelocation,%20I%20need%20help%20with...', '_blank');
+        }
+    </script>
+
+    <script>
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'login.html';
+        }
+
+        function removeFavorite(button) {
+            const card = button.closest('.saved-card');
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.8)';
+
+            setTimeout(() => {
+                card.remove();
+                checkEmptyState();
+            }, 300);
+        }
+
+        function filterServices(category) {
+            const cards = document.querySelectorAll('.saved-card');
+            const chips = document.querySelectorAll('.filter-chip');
+
+            // Update active chip
+            chips.forEach(chip => chip.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            checkEmptyState();
+        }
+
+        function checkEmptyState() {
+            const cards = document.querySelectorAll('.saved-card');
+            const emptyState = document.getElementById('emptyState');
+            const grid = document.getElementById('savedGrid');
+
+            if (cards.length === 0) {
+                grid.style.display = 'none';
+                emptyState.style.display = 'block';
+            }
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.account-menu')) {
+                const dropdown = document.getElementById('accountDropdown');
+                dropdown.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

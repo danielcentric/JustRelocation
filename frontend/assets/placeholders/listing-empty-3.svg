@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" fill="none">
+  <rect width="400" height="250" fill="#D1D5DB"/>
+  <circle cx="200" cy="100" r="30" fill="#9CA3AF"/>
+  <path d="M185 95 L200 110 L215 85" stroke="#D1D5DB" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <rect x="190" y="105" width="20" height="15" fill="#D1D5DB"/>
+  <text x="200" y="160" font-family="Arial, sans-serif" font-size="14" fill="#6B7280" text-anchor="middle" font-weight="500">Your listing image here</text>
+  <text x="200" y="180" font-family="Arial, sans-serif" font-size="12" fill="#9CA3AF" text-anchor="middle">Slot 3</text>
+</svg>

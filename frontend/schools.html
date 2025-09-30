@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schools & Education - JustRelocation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="expedia-style.css">
+</head>
+<body>
+   <header class="header">
+     <div class="header-main">
+       <a href="index.html" class="logo">JustRelocation</a>
+
+       <nav class="nav-center">
+         <a href="index.html" class="nav-link">NHS Trusts</a>
+         <a href="housing.html" class="nav-link">Housing</a>
+         <a href="banking.html" class="nav-link">Banking</a>
+         <a href="registration.html" class="nav-link">Registration</a>
+         <a href="transport.html" class="nav-link">Transport</a>
+         <a href="schools.html" class="nav-link">Schools</a>
+         <a href="about.html" class="nav-link">About</a>
+         <a href="contact.html" class="nav-link">Contact</a>
+       </nav>
+
+       <div class="header-right">
+         <div class="notification-bell">
+           <span>🔔</span>
+           <span class="notification-dot"></span>
+         </div>
+         <a href="list-service.html" class="list-property-btn">List your service</a>
+         <div class="account-menu" onclick="toggleAccountDropdown()">
+           <div class="account-avatar">J</div>
+           <span>▼</span>
+           <div class="account-dropdown" id="accountDropdown">
+             <div class="dropdown-header">
+               <div class="user-info">
+                 <div class="user-name">John Smith</div>
+                 <div class="user-email">john.smith@nhs.uk</div>
+               </div>
+             </div>
+             <div class="dropdown-divider"></div>
+             <a href="my-profile.html" class="dropdown-item">
+               <i class="fas fa-user"></i>
+               <span>My Profile</span>
+             </a>
+             <a href="saved-services.html" class="dropdown-item">
+               <i class="fas fa-heart"></i>
+               <span>Saved Services</span>
+             </a>
+             <a href="support.html" class="dropdown-item">
+               <i class="fas fa-life-ring"></i>
+               <span>Help & Support</span>
+             </a>
+             <div class="dropdown-divider"></div>
+             <a href="provider-portal.html" class="dropdown-item">
+               <i class="fas fa-briefcase"></i>
+               <span>Provider Portal</span>
+             </a>
+             <div class="dropdown-divider"></div>
+             <a href="#" class="dropdown-item" onclick="logout()">
+               <i class="fas fa-sign-out-alt"></i>
+               <span>Sign Out</span>
+             </a>
+           </div>
+         </div>
+       </div>
+     </div>
+   </header>
+
+    <!-- Schools Hero Section -->
+    <section class="hero" style="min-height: 300px; background: linear-gradient(135deg, #003580 0%, #0057d9 100%);">
+        <div class="hero-overlay">
+            <div class="hero-container">
+                <h1 class="hero-title">Schools & Education Services</h1>
+                <p class="hero-subtitle">Find the best schools and educational support for NHS families</p>
+
+                <div class="search-section">
+                    <div class="search-filters">
+                        <div class="filter-group">
+                            <input type="text" placeholder="Enter area or postcode" class="search-input" id="areaSearch">
+                        </div>
+                        <div class="filter-group">
+                            <select class="search-input" id="schoolType">
+                                <option value="">Select school type</option>
+                                <option value="primary">Primary School</option>
+                                <option value="secondary">Secondary School</option>
+                                <option value="nursery">Nursery & Pre-school</option>
+                                <option value="international">International Schools</option>
+                            </select>
+                        </div>
+                        <button class="search-btn">Find Schools</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- School Services Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Educational Services for NHS Families</h2>
+                <p class="section-subtitle">Supporting your children's education during your NHS career</p>
+            </div>
+
+            <div class="school-services">
+                <div class="service-card">
+                    <div class="service-icon">🏫</div>
+                    <h3>School Search & Applications</h3>
+                    <p>Expert guidance on finding and applying to the best schools in your area</p>
+                    <ul class="service-features">
+                        <li>Local school research</li>
+                        <li>Application assistance</li>
+                        <li>Ofsted reports analysis</li>
+                        <li>NHS family priority guidance</li>
+                    </ul>
+                    <div class="pricing">
+                        <span class="price">From £99</span>
+                        <span class="price-period">consultation</span>
+                    </div>
+                    <button class="btn-primary">Get Help</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">👶</div>
+                    <h3>Childcare & Nurseries</h3>
+                    <p>Flexible childcare solutions for NHS shift patterns</p>
+                    <ul class="service-features">
+                        <li>24/7 nursery options</li>
+                        <li>NHS staff discounts</li>
+                        <li>Flexible booking</li>
+                        <li>Emergency childcare</li>
+                    </ul>
+                    <div class="pricing">
+                        <span class="price">From £45</span>
+                        <span class="price-period">per day</span>
+                    </div>
+                    <button class="btn-primary">Find Childcare</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🎓</div>
+                    <h3>Tutoring & Support</h3>
+                    <p>Additional educational support for NHS children</p>
+                    <ul class="service-features">
+                        <li>One-to-one tutoring</li>
+                        <li>Exam preparation</li>
+                        <li>Special needs support</li>
+                        <li>NHS family rates</li>
+                    </ul>
+                    <div class="pricing">
+                        <span class="price">From £25</span>
+                        <span class="price-period">per hour</span>
+                    </div>
+                    <button class="btn-primary">Find Tutor</button>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🌍</div>
+                    <h3>International Support</h3>
+                    <p>Support for international NHS workers with children</p>
+                    <ul class="service-features">
+                        <li>Curriculum guidance</li>
+                        <li>Language support</li>
+                        <li>Cultural integration</li>
+                        <li>Documentation help</li>
+                    </ul>
+                    <div class="pricing">
+                        <span class="price">From £149</span>
+                        <span class="price-period">complete package</span>
+                    </div>
+                    <button class="btn-primary">Get Support</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/+447000000000" target="_blank" class="whatsapp-button">
+            <i class="fab fa-whatsapp"></i>
+            <span>Chat on WhatsApp</span>
+        </a>
+    </div>
+
+    <style>
+    .school-services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-top: 32px;
+    }
+
+    .service-card {
+        background: white;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        transition: all 0.2s;
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .service-card:hover {
+        box-shadow: 0 8px 16px rgba(0,0,0,0.16);
+        transform: translateY(-4px);
+    }
+
+    .service-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+        margin: 0 0 12px 0;
+        color: #0057d9;
+        font-size: 20px;
+    }
+
+    .service-card p {
+        color: #616161;
+        margin-bottom: 16px;
+        line-height: 1.5;
+    }
+
+    .service-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+        text-align: left;
+    }
+
+    .service-features li {
+        padding: 6px 0;
+        color: #616161;
+        position: relative;
+        padding-left: 20px;
+        font-size: 14px;
+    }
+
+    .service-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #00a866;
+        font-weight: bold;
+    }
+
+    .pricing {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .price {
+        font-size: 20px;
+        font-weight: bold;
+        color: #d32f2f;
+    }
+
+    .price-period {
+        font-size: 14px;
+        color: #8b8b8b;
+    }
+    </style>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-heartbeat"></i>
+                            <span class="brand-name">JustRelocation</span>
+                        </div>
+                        <p>Professional services directory for NHS healthcare workers across the UK</p>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="housing.html">Housing & Accommodation</a></li>
+                        <li><a href="banking.html">Banking & Finance</a></li>
+                        <li><a href="registration.html">Professional Registration</a></li>
+                        <li><a href="transport.html">Transport & Travel</a></li>
+                        <li><a href="schools.html">Schools & Education</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>NHS Trusts</h4>
+                    <ul>
+                        <li><a href="index.html">London NHS Trusts</a></li>
+                        <li><a href="index.html">Manchester NHS</a></li>
+                        <li><a href="index.html">Birmingham Hospitals</a></li>
+                        <li><a href="index.html">Scotland NHS Boards</a></li>
+                        <li><a href="index.html">Wales Health Boards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Providers</h4>
+                    <ul>
+                        <li><a href="list-service.html">List Your Service</a></li>
+                        <li><a href="provider-portal.html">Provider Portal</a></li>
+                        <li><a href="contact.html">Pricing Plans</a></li>
+                        <li><a href="about.html">Success Stories</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Support & Legal</h4>
+                    <ul>
+                        <li><a href="support.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2025 JustRelocation. All rights reserved.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Support Chat -->
+    <div class="whatsapp-chat" onclick="openSupportChat()">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="chat-tooltip">
+            <span>Need help? Chat with us!</span>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccountDropdown() {
+            const dropdown = document.getElementById('accountDropdown');
+            dropdown.classList.toggle('show');
+        }
+
+        function logout() {
+            alert('Logging out...');
+            window.location.href = 'login.html';
+        }
+
+        function openSupportChat() {
+            window.open('https://wa.me/447000000000?text=Hi%20JustRelocation,%20I%20need%20help%20with...', '_blank');
+        }
+
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.account-menu')) {
+                const dropdown = document.getElementById('accountDropdown');
+                if (dropdown) dropdown.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
